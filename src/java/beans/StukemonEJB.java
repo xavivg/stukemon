@@ -8,6 +8,7 @@ package beans;
 import entities.Pokemon;
 import entities.Trainer;
 import static java.lang.System.out;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -43,7 +44,6 @@ public class StukemonEJB {
     }
 
     public boolean createTrainer(Trainer c) {
-        out.println(c.getName()+"HEEEEEEEEEEEEEEEEEEEEEEY");
         EntityManager em = emf.createEntityManager();
         if (!trainerExist(c.getName())) {
             em.persist(c);
@@ -62,6 +62,16 @@ public class StukemonEJB {
             em.close();
             return true;
         }
+        return false;
+    }
+    public boolean createPoke(Pokemon c) {
+        EntityManager em = emf.createEntityManager();
+            if (!pokeExist(c.getName())) {
+            em.persist(c);
+            em.flush();
+            em.close();
+            return true;
+            }
         return false;
     }
      public boolean pokeExist(String name) {
@@ -92,5 +102,9 @@ public class StukemonEJB {
             return true;
         }
         return false;
+    }
+    public boolean countPoke(Trainer trainer) {
+         List<Pokemon> res = emf.createEntityManager().createNamedQuery("Pokemon.findByTrainer").setParameter("trainer", trainer).getResultList();
+        return (res.size() <= 5);
     }
 }

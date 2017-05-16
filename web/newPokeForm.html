@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <h3>Bienvenido a Stukemon de Xavier Vilardell i Gras</h3>
+
+            <form action="newPoke" method="POST">
+
+                <input type="text" placeholder="nombre" name="nombre" required>
+                <select name="type">
+                    <option value="normal">normal</option>
+                    <option value="lucha">lucha</option>
+                    <option value="volador">volador</option>
+                    <option value="veneno">veneno</option>
+                    <option value="tierra">tierra</option>
+                    <option value="roca">roca</option>
+                    <option value="insecto">insecto</option>
+                    <option value="fantasma">fantasma</option>
+                    <option value="acero">acero</option>
+                    <option value="fuego">fuego</option>
+                    <option value="agua">agua</option>
+                    <option value="hierba">hierba</option>
+                    <option value="eléctrico">eléctrico</option>
+                    <option value="psíquico">psíquico</option>
+                    <option value="hielo">hielo</option>
+                    <option value="dragón">dragón</option>
+                    <option value="hada">hada</option>
+                    <option value="siniestro">siniestro</option>
+                </select>
+                <input type="text" placeholder="habilidad" name="habilidad" required>
+                <input type="number" placeholder="nivelAtaque" name="nivelAtaque" required>                
+                <input type="number" placeholder="nivelDefensa" name="nivelDefensa" required>                
+                <input type="number" placeholder="velocidad" name="velocidad" required>                
+                <input type="number" placeholder="vida" name="vida" required>                
+                <input type="text" placeholder="entrenador" name="entrenador" required>                
+                <button type="submit">Crear pokemon</button>      
+            </form>
+
+        </div>
+    </body>
+</html>

@@ -8,6 +8,10 @@
         <servlet-name>newTrainer</servlet-name>
         <servlet-class>servlets.newTrainer</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>newPoke</servlet-name>
+        <servlet-class>servlets.newPoke</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>sampleServlet</servlet-name>
         <url-pattern>/sampleServlet</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>newTrainer</servlet-name>
         <url-pattern>/newTrainer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>newPoke</servlet-name>
+        <url-pattern>/newPoke</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
