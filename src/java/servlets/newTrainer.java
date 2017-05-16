@@ -20,8 +20,10 @@ import javax.servlet.http.HttpServletResponse;
  * @author usu26
  */
 public class newTrainer extends HttpServlet {
-  @EJB
+
+    @EJB
     StukemonEJB miEjb;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,19 +44,24 @@ public class newTrainer extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet newTrainer</title>");            
+            out.println("<title>Servlet newTrainer</title>");
             out.println("</head>");
             out.println("<body>");
-            if(miEjb.createTrainer(c)){
-                out.println("<h3>"+name+" fué creado correctamente</h3>");
-                out.println("<form action=\"index.html\"><button type=\"submit\">Ir a home</button></form>");
+            if (!miEjb.trainerExist(name)) {
+                if (miEjb.createTrainer(c)) {
+                    out.println("<h3>" + name + " fué creado correctamente</h3>");
+                    out.println("<form action=\"index.html\"><button type=\"submit\">Ir a home</button></form>");
+                } else {
+                    out.println("<h3>Hubo un error creando el entrenador</h3>");
+                }
+                out.println("<h1>Servlet newTrainer at " + request.getContextPath() + "</h1>");
+                out.println("</body>");
+                out.println("</html>");
             }
             else{
-                out.println("<h3>Hubo un error creando el entrenador</h3>");
+                 out.println("<h3>Ya esta creado este Trainer</h3>");
+                 out.println("<form action=\"index.html\"><button type=\"submit\">Ir a home</button></form>");
             }
-            out.println("<h1>Servlet newTrainer at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
         }
     }
 
