@@ -107,4 +107,12 @@ public class StukemonEJB {
          List<Pokemon> res = emf.createEntityManager().createNamedQuery("Pokemon.findByTrainer").setParameter("trainer", trainer).getResultList();
         return (res.size() <= 5);
     }
+    public List<Pokemon> selectAllPokemon() {
+        return emf.createEntityManager().createNamedQuery("Pokemon.findAll").getResultList();
+}
+    public List<Pokemon> getPokemonsByTrainer(String name) {
+        Trainer trainer = getTrainer(name);
+        return emf.createEntityManager().createNamedQuery("Pokemon.findByTrainer").setParameter("trainer", trainer).getResultList();
+
+    }
 }
