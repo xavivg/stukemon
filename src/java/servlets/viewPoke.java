@@ -21,8 +21,10 @@ import javax.servlet.http.HttpServletResponse;
  * @author xaviv
  */
 public class viewPoke extends HttpServlet {
- @EJB
+
+    @EJB
     StukemonEJB miEjb;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,12 +43,15 @@ public class viewPoke extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>View "+name+" pokemons</title>");            
+            out.println("<title>View " + name + " pokemons</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h3>Listado de pokemons de "+name+"</h3>");
-            out.println("<table style=\"width:100%;text-align:center\">");
-            out.println("<tr>");
+            if (miEjb.trainerExist(name)) {
+                List<Pokemon> pokeList = miEjb.getPokemonsByTrainer(name);
+                out.println("<h3>Listado de pokemons de " + name + ". Tiene un total de "+pokeList.size()+"</h3>");
+                out.println("<form action=\"index.html\"><button type=\"submit\">Ir a home</button></form>");
+                out.println("<table style=\"width:100%;text-align:center\">");
+                out.println("<tr>");
                 out.println("<th>Nombre</th>");
                 out.println("<th>Tipo</th>");
                 out.println("<th>Habilidad</th>");
@@ -55,27 +60,34 @@ public class viewPoke extends HttpServlet {
                 out.println("<th>Velocidad</th>");
                 out.println("<th>Vida</th>");
                 out.println("<th>Nivel</th>");
-                out.println("<th>Delete</th>");
-            out.println("</tr>");
-             List<Pokemon> pokeList = miEjb.getPokemonsByTrainer(name);
-            for (Pokemon poke : pokeList) {
-            out.println("<tr>");
-              out.println("<td>"+poke.getName()+"</td>");
-              out.println("<td>"+poke.getType()+"</td>");
-              out.println("<td>"+poke.getAbility()+"</td>");
-              out.println("<td>"+poke.getAttack()+"</td>");
-              out.println("<td>"+poke.getDefense()+"</td>");
-              out.println("<td>"+poke.getSpeed()+"</td>");
-              out.println("<td>"+poke.getLife()+"</td>");
-              out.println("<td>"+poke.getLevel()+"</td>");
-              out.println("<td><form name='"+poke.getName()+"' method=\"GET\" action='delPoke?name="+poke.getName()+"'><button type='submit'>Delete</button></form></td>");
-            out.println("</tr>");
-           }
-            out.println("</table>");
-            out.println("<body>");
-            out.println("<body>");
-            out.println("</body>");
-            out.println("</html>");
+                out.println("<th>Eliminar</th>");
+                out.println("<th>Mejorar vida</th>");
+                out.println("</tr>");
+                for (Pokemon poke : pokeList) {
+                    out.println("<tr>");
+                    out.println("<td>" + poke.getName() + "</td>");
+                    out.println("<td>" + poke.getType() + "</td>");
+                    out.println("<td>" + poke.getAbility() + "</td>");
+                    out.println("<td>" + poke.getAttack() + "</td>");
+                    out.println("<td>" + poke.getDefense() + "</td>");
+                    out.println("<td>" + poke.getSpeed() + "</td>");
+                    out.println("<td>" + poke.getLife() + "</td>");
+                    out.println("<td>" + poke.getLevel() + "</td>");
+                    out.println("<td><form name='del" + poke.getName() + "' method=\"POST\" action='delPoke'><input type=\"hidden\" name=\"poke\" value="+poke.getName()+"><input type=\"hidden\" name=\"trainer\" value="+name+"><button type='submit'>Eliminar</button></form></td>");
+                    out.println("<td><form name='upLife" + poke.getName() + "' method=\"POST\" action='upLife'><input type=\"hidden\" name=\"poke\" value="+poke.getName()+"><input type=\"hidden\" name=\"trainer\" value="+name+"><button type='submit'>Mejorar vida</button></form></td>");
+                    out.println("</tr>");
+                }
+
+                out.println("</table>");
+                out.println("<body>");
+                out.println("<body>");
+                out.println("</body>");
+                out.println("</html>");
+            } else {
+                out.println("<h3>No existe ningun entrenador con el nombre " + name + "</h3>");
+                out.println("<form action=\"newTrainerForm.html\"><button type=\"submit\">Crear a " + name + "</button></form>");
+                out.println("<form action=\"index.html\"><button type=\"submit\">Ir a home</button></form>");
+            }
         }
     }
 

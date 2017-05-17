@@ -6,6 +6,7 @@
 package servlets;
 
 import beans.StukemonEJB;
+import entities.Pokemon;
 import entities.Trainer;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,10 +20,11 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author xaviv
  */
-public class delPoke extends HttpServlet {
+public class upLife extends HttpServlet {
 
     @EJB
     StukemonEJB miEjb;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,21 +41,21 @@ public class delPoke extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             String poke_name = request.getParameter("poke");
             String trainer_name = request.getParameter("trainer");
-
-                  
-            if (miEjb.pokeExist(poke_name)) {
-                  if (miEjb.delPoke(poke_name, trainer_name)) {
-                      out.println("<h3>El pokemon " + poke_name + " del entrenador " + trainer_name + " ha sido eliminado correctamente</h3>");
-                      out.println("<form action=\"index.html\"><button type=\"submit\">Ir a home</button></form>");
-                      out.println("<form action=\"viewPoke\"><input type=\"hidden\" name=\"nombre\" value="+trainer_name+"><button type=\"submit\">Seguir viendo pokemon de "+trainer_name+"</button></form>");
-                  } else {
-                      out.println("<h3>El pokemon " + poke_name + " del entrenador " + trainer_name + " no existe!</h3>");
-                  }
-              } else {
-                  out.println("<h3>Ya existe este Pokemon de " + trainer_name + ".</h3>");
-                  out.println("<form action=\"index.html\"><button type=\"submit\">Ir a home</button></form>");
-                  out.println("<form action=\"viewPoke\"><input type=\"hidden\" name=\"nombre\" value="+trainer_name+"><button type=\"submit\">Seguir viendo pokemon de "+trainer_name+"</button></form>");
-              }
+            if (miEjb.trainerExist(trainer_name)) {
+            Trainer trainer = miEjb.getTrainer(trainer_name);
+            Pokemon poke = miEjb.getPoke(poke_name);
+            if(trainer.getPotions() > 1){
+                if(miEjb.upLife(trainer_name, poke_name)){
+                    out.println("<h3>El pokemon "+poke_name+" de "+trainer_name+" ha recibido 50 de vida, ahora tiene "+poke.getLife()+"</h3>");
+                    out.println("<h3>El entrenador "+trainer_name+" ha gastado una pocion, le quedan "+trainer.getPotions()+"</h3>");
+                }
+            }
+            }
+            else{
+                out.println("<h3>No existe ningun entrenador con el nombre " + trainer_name + "</h3>");
+                out.println("<form action=\"newTrainerForm.html\"><button type=\"submit\">Crear a " + trainer_name + "</button></form>");
+                out.println("<form action=\"index.html\"><button type=\"submit\">Ir a home</button></form>");
+            }
         }
     }
 

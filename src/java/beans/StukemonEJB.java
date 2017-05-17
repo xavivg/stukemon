@@ -92,11 +92,11 @@ public class StukemonEJB {
         }
        return null;
     }
-    public boolean deletePoke(String nombre) {
+        public boolean delPoke(String poke_name, String trainer_name) {
         emf.getCache().evictAll();
         EntityManager em = emf.createEntityManager();
-        Pokemon poke = em.find(Pokemon.class, nombre);
-        if(poke != null){
+        Pokemon poke = em.find(Pokemon.class, poke_name);
+        if(poke != null && poke.getTrainer().getName().equals(trainer_name)){
             em.remove(poke);
             em.close();
             return true;
@@ -114,5 +114,12 @@ public class StukemonEJB {
         Trainer trainer = getTrainer(name);
         return emf.createEntityManager().createNamedQuery("Pokemon.findByTrainer").setParameter("trainer", trainer).getResultList();
 
+    }
+    public boolean upLife(String name, String poke){
+        Trainer trainer = getTrainer(name);
+        trainer.setPotions(trainer.getPotions() -1 );
+        Pokemon pokemon = getPoke(poke);
+        pokemon.setLife(pokemon.getLife()+50);
+       return false;
     }
 }

@@ -20,6 +20,10 @@
         <servlet-name>delPoke</servlet-name>
         <servlet-class>servlets.delPoke</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>upLife</servlet-name>
+        <servlet-class>servlets.upLife</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>sampleServlet</servlet-name>
         <url-pattern>/sampleServlet</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>delPoke</servlet-name>
         <url-pattern>/delPoke</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>upLife</servlet-name>
+        <url-pattern>/upLife</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
