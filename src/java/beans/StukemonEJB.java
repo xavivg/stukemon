@@ -144,4 +144,14 @@ public class StukemonEJB {
         
        return false;
     }
+    public List<Pokemon> getAllPokemons() {
+
+        return emf.createEntityManager().createNamedQuery("Pokemon.findAllOrderRanking").getResultList();
+
+    }
+    public List<Trainer> getAllTrainers() {
+
+        return emf.createEntityManager().createNamedQuery("Trainer.findAllOrderRanking").getResultList();
+
+    }
 }

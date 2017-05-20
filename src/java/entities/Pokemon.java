@@ -40,7 +40,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Pokemon.findBySpeed", query = "SELECT p FROM Pokemon p WHERE p.speed = :speed"),
     @NamedQuery(name = "Pokemon.findByLife", query = "SELECT p FROM Pokemon p WHERE p.life = :life"),
     @NamedQuery(name = "Pokemon.findByLevel", query = "SELECT p FROM Pokemon p WHERE p.level = :level"),
-    @NamedQuery(name = "Pokemon.findByTrainer", query = "SELECT p FROM Pokemon p WHERE p.trainer = :trainer")})
+    @NamedQuery(name = "Pokemon.findByTrainer", query = "SELECT p FROM Pokemon p WHERE p.trainer = :trainer"),
+    @NamedQuery(name = "Pokemon.findAllOrderRanking", query = "SELECT p FROM Pokemon p order by p.level desc, p.life desc"),})
 public class Pokemon implements Serializable {
 
     private static final long serialVersionUID = 1L;

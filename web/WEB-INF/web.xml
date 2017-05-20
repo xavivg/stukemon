@@ -28,6 +28,14 @@
         <servlet-name>upPotions</servlet-name>
         <servlet-class>servlets.upPotions</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>pokeList</servlet-name>
+        <servlet-class>servlets.pokeList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>trainerList</servlet-name>
+        <servlet-class>servlets.trainerList</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>sampleServlet</servlet-name>
         <url-pattern>/sampleServlet</url-pattern>
@@ -55,6 +63,14 @@
     <servlet-mapping>
         <servlet-name>upPotions</servlet-name>
         <url-pattern>/upPotions</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>pokeList</servlet-name>
+        <url-pattern>/pokeList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>trainerList</servlet-name>
+        <url-pattern>/trainerList</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
