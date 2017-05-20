@@ -92,11 +92,11 @@ public class StukemonEJB {
         }
        return null;
     }
-        public boolean delPoke(String poke_name, String trainer_name) {
+    public boolean delPoke(String poke_name, String trainer_name) {
         emf.getCache().evictAll();
         EntityManager em = emf.createEntityManager();
         Pokemon poke = em.find(Pokemon.class, poke_name);
-        if(poke != null && poke.getTrainer().getName().equals(trainer_name)){
+        if(poke.getTrainer().getName().equalsIgnoreCase(trainer_name)){
             em.remove(poke);
             em.close();
             return true;

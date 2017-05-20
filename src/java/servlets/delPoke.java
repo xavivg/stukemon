@@ -47,7 +47,7 @@ public class delPoke extends HttpServlet {
                       out.println("<form action=\"index.html\"><button type=\"submit\">Ir a home</button></form>");
                       out.println("<form action=\"viewPoke\"><input type=\"hidden\" name=\"nombre\" value="+trainer_name+"><button type=\"submit\">Seguir viendo pokemon de "+trainer_name+"</button></form>");
                   } else {
-                      out.println("<h3>El pokemon " + poke_name + " del entrenador " + trainer_name + " no existe!</h3>");
+                      out.println("<h3>No se pudo eliminar el "+poke_name+"!</h3>");
                   }
               } else {
                   out.println("<h3>Ya existe este Pokemon de " + trainer_name + ".</h3>");

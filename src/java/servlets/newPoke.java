@@ -75,7 +75,7 @@ public class newPoke extends HttpServlet {
                 } else {
                     out.println("<h3>El entrenador " + trainer_name + " ya tiene el máximo de Pokemons posibles(6), elimina 1 e intentalo de nuevo.</h3>");
                     out.println("<form action=\"index.html\"><button type=\"submit\">Ir a home</button></form>");
-                    out.println("<form action=\"index.html\"><button type=\"submit\">Borrar un Pokemon</button></form>"); //TODO Pending to change action
+                    out.println("<form action=\"viewPokeForm.html\"><button type=\"submit\">Borrar un Pokemon</button></form>"); //TODO Pending to change action
                 }
 
             }
