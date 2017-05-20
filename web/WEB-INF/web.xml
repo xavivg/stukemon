@@ -24,6 +24,10 @@
         <servlet-name>upLife</servlet-name>
         <servlet-class>servlets.upLife</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>upPotions</servlet-name>
+        <servlet-class>servlets.upPotions</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>sampleServlet</servlet-name>
         <url-pattern>/sampleServlet</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>upLife</servlet-name>
         <url-pattern>/upLife</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>upPotions</servlet-name>
+        <url-pattern>/upPotions</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

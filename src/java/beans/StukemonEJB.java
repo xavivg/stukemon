@@ -116,10 +116,32 @@ public class StukemonEJB {
 
     }
     public boolean upLife(String name, String poke){
+        EntityManager em = emf.createEntityManager();
         Trainer trainer = getTrainer(name);
-        trainer.setPotions(trainer.getPotions() -1 );
         Pokemon pokemon = getPoke(poke);
-        pokemon.setLife(pokemon.getLife()+50);
+        if(pokemon != null && trainer != null){
+            trainer.setPotions(trainer.getPotions() -1 );
+            pokemon.setLife(pokemon.getLife()+50);
+            em.merge(trainer);
+            em.merge(pokemon);
+            em.close();
+            return true;
+        }
+        
+       return false;
+    }
+    public boolean upPotions(String name, int potions){
+        emf.getCache().evictAll();
+        EntityManager em = emf.createEntityManager();
+        Trainer trainer = getTrainer(name);
+        if(trainer != null){
+            trainer.setPotions(trainer.getPotions()+potions);
+            trainer.setPoints(trainer.getPoints()-potions*10);
+            em.merge(trainer);
+            em.close();
+            return true;
+        }
+        
        return false;
     }
 }

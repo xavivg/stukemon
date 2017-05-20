@@ -17,9 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author usu26
+ * @author xaviv
  */
-public class newTrainer extends HttpServlet {
+public class upPotions extends HttpServlet {
 
     @EJB
     StukemonEJB miEjb;
@@ -37,29 +37,22 @@ public class newTrainer extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String name = request.getParameter("nombre");
-            int pokeballs = Integer.parseInt(request.getParameter("pokeballs"));
+            /* TODO output your page here. You may use following sample code. */
+            String trainer_name = request.getParameter("nombre");
             int potions = Integer.parseInt(request.getParameter("potions"));
-            Trainer c = new Trainer(name, pokeballs, potions, 0);
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet newTrainer</title>");
-            out.println("</head>");
-            out.println("<body>");
-            if (!miEjb.trainerExist(name)) {
-                if (miEjb.createTrainer(c)) {
-                    out.println("<h3>" + name + " fué creado correctamente</h3>");
-                    out.println("<form action=\"index.html\"><button type=\"submit\">Ir a home</button></form>");
+            if (miEjb.trainerExist(trainer_name)) {
+                Trainer trainer = miEjb.getTrainer(trainer_name);
+                if (trainer.getPoints() > potions * 10) {
+                    if (miEjb.upPotions(trainer_name, potions)) {
+                        out.println("<h2>La obtención de pociones a sido aceptada, ahora tienes " + trainer.getPoints() + " puntos y " + trainer.getPotions() + " pociones</h2>");
+                    } else {
+                        out.println("<h2>Algo falló en la operación</h2>");
+                    }
                 } else {
-                    out.println("<h3>Hubo un error creando el entrenador</h3>");
+                    out.println("<h2>" + trainer.getName() + " no tiene los suficientes puntos ( tiene : " + trainer.getPoints() + " ) para comprar " + potions + " pociones, ahora tiene" + trainer.getPotions() + "</h2>");
                 }
-                out.println("</body>");
-                out.println("</html>");
-            }
-            else{
-                 out.println("<h3>Ya esta creado este Trainer</h3>");
-                 out.println("<form action=\"index.html\"><button type=\"submit\">Ir a home</button></form>");
+            } else {
+                out.println("<h2>No se encuentra ningun trainer de nombre " + trainer_name + "</h2>");
             }
         }
     }
